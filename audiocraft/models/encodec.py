@@ -108,6 +108,9 @@ class CompressionModel(ABC, nn.Module):
             model_type = name.split('_')[1]
             logger.info("Getting pretrained compression model from DAC %s", model_type)
             model = DAC(model_type)
+        elif name in ['audiogen_encodec_16khz']:
+            logger.info("Getting pretrained Encodec_16khz compression model from facebook/audiogen-medium")
+            model = loaders.load_compression_model("facebook/audiogen-medium", device=device)
         elif name in ['debug_compression_model']:
             logger.info("Getting pretrained compression model for debug")
             model = builders.get_debug_compression_model()
